@@ -30,22 +30,33 @@ class App extends Component {
     this.state = {  
       input: '',
       imageURL: '',
-      box: {},
+      box: [{
+        leftCol: '',
+        topRow: '',
+        rightCol: '',
+        bottomRow: ''
+      }],
   }
 }
 
 calculateFaceLocation = (data) => {
-  const face = data.outputs[0].data.regions[0].region_info.bounding_box;
+  // const face = data.outputs[0].data.regions[0].region_info.bounding_box;
   const image = document.getElementById('inputimage');
   const width = Number(image.width);
   const height = Number(image.height);
-  console.log(width, height);
-  return{
-    leftCol: face.left_col * width,
-    topRow: face.top_row * height,
-    rightCol: width - (face.right_col * width),
-    bottomRow: height - (face.bottom_row * height)
-  }
+  // console.log(data); //regions is the array to loop through
+  let boxCoordinates = []
+  data.outputs[0].data.regions.map(function(array,i) {
+      const face = array.region_info.bounding_box
+      boxCoordinates.push({
+        leftCol: face.left_col * width,
+        topRow: face.top_row * height,
+        rightCol: width - (face.right_col * width),
+        bottomRow: height - (face.bottom_row * height)
+      })
+  })
+  console.log(boxCoordinates);
+  return boxCoordinates;
 }
 
 displayFaceBox = (box) => {
