@@ -38,17 +38,16 @@ class App extends Component {
         rightCol: '',
         bottomRow: '' 
       }],
-      route:'signin'
+      route:'home',
+      isSignedIn: false
 
   }
 }
 
 calculateFaceLocation = (data) => {
-  // const face = data.outputs[0].data.regions[0].region_info.bounding_box;
   const image = document.getElementById('inputimage');
   const width = Number(image.width);
   const height = Number(image.height);
-  // console.log(data); //regions is the array to loop through
   let boxCoordinates = []
   data.outputs[0].data.regions.map(function(array,i) {
       const face = array.region_info.bounding_box
@@ -59,7 +58,6 @@ calculateFaceLocation = (data) => {
         bottomRow: height - (face.bottom_row * height)
       })
   })
-  console.log(boxCoordinates);
   return boxCoordinates;
 }
 
@@ -82,24 +80,33 @@ onButtonSubmit = () => {
 }
 
 onRouteChange = (route) => {
-    this.setState({route: route});
+  this.setState({route: route});
+}
+
+changeSignIn = (isSignedIn) =>{
+    if (isSignedIn) {
+      this.setState({isSignedIn: false})
+  } else {
+      this.setState({isSignedIn: true})
+  }
 }
 
   render(){
+    const {isSignedIn, imageURL, route, box} = this.state;
     return (
       <div className="App">
       <Particles className='particles'
               params={particlesOptions}/>
-        <Navigation onRouteChange={this.onRouteChange} />
-        {this.state.route === 'home'
+        <Navigation changeSignIn={this.changeSignIn} onRouteChange={this.onRouteChange} isSignedIn={isSignedIn} route={route} />
+        {route === 'home'
           ? <div>
               <Logo />
-              <Rank />
+              <Rank isSignedIn={isSignedIn} />
               <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
-              <FaceRecognition boxArray={this.state.box} imageURL={this.state.imageURL} />
+              <FaceRecognition boxArray={box} imageURL={imageURL} />
             </div>
-          : (this.state.route === 'signin'
-              ? <SignIn onRouteChange={this.onRouteChange} />
+          : (route === 'signin'
+              ? <SignIn changeSignIn={this.changeSignIn} onRouteChange={this.onRouteChange} />
               : <Register onRouteChange={this.onRouteChange} />
             )
         } 
