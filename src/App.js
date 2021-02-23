@@ -85,9 +85,10 @@ onRouteChange = (route) => {
 
 changeSignIn = (isSignedIn) =>{
     if (isSignedIn) {
-      this.setState({isSignedIn: false})
+      console.log("I'm signed in and trying to sign out");
+      this.setState({ isSignedIn: false }, () => {console.log(this.state.route)});
   } else {
-      this.setState({isSignedIn: true})
+      this.setState({ isSignedIn: true }, () => {console.log(this.state.route)});
   }
 }
 
