@@ -10,6 +10,7 @@ import Clarifai from 'clarifai';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
 
+
 const app = new Clarifai.App({
     apiKey: process.env.REACT_APP_API_KEY
 });
@@ -42,6 +43,12 @@ class App extends Component {
       isSignedIn: false
 
   }
+}
+
+componentDidMount() {
+  fetch('http://localhost:3001')
+  .then( response => response.json())
+  .then(console.log)
 }
 
 calculateFaceLocation = (data) => {
