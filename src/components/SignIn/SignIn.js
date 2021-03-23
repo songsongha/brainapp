@@ -25,15 +25,16 @@ class SignIn extends React.Component {
 		})
 		.then(response => response.json())
 		.then(data => {
-			if (data === 'success') {
+			if (data) {
+				console.log("signed in successfully",data)
 				this.props.onRouteChange('home'); 
 				this.props.changeSignIn(false);
+				this.props.loadUser(data);
 			}
 		})
-
 	}
 	render() {
-		const { onRouteChange, changeSignIn } = this.props;
+		const { loadUser, onRouteChange, changeSignIn } = this.props;
  // ({ changeSignIn, onRouteChange }) => {
 		return(
 			<article className="br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
@@ -68,8 +69,7 @@ class SignIn extends React.Component {
 				      value="Sign in"/>
 				    </div>
 				    <div className="lh-copy mt3">
-				      <p onClick= { ()=> onRouteChange('register')} className="f6 link dim black db pointer">Register</p>
-				      
+				      <p onClick= { ()=> onRouteChange('register')} className="f6 link dim black db pointer">Register</p>   
 				    </div>
 				  </div>
 				</main>

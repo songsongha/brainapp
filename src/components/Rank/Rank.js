@@ -1,14 +1,15 @@
 import React from 'react';
 
-const Rank = ({isSignedIn}) => {
+const Rank = ({user, isSignedIn}) => {
 	if (isSignedIn){
+		{console.log(user)};
 		return(
 			<div>
 				<div className='white f3'>
-					{'Song, your current rank is...'}
+					{user.name}, your current entry count is...
 				</div>
 				<div className='white f1'>
-					{'#5'}
+					{user.entries}
 				</div>
 			</div>
 		);
