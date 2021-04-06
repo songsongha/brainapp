@@ -24,12 +24,14 @@ class SignIn extends React.Component {
 			})
 		})
 		.then(response => response.json())
-		.then(data => {
-			if (data) {
-				console.log("signed in successfully",data)
+		.then(user => {
+			if (user.id) {
+				console.log("signed in successfully",user)
 				this.props.onRouteChange('home'); 
 				this.props.changeSignIn(false);
-				this.props.loadUser(data);
+				this.props.loadUser(user);
+			} else {
+				alert('Incorrect username or password')
 			}
 		})
 	}

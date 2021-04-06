@@ -6,7 +6,7 @@ const Rank = ({user, isSignedIn}) => {
 		return(
 			<div>
 				<div className='white f3'>
-					{user.name}, your current entry count is...
+					{user.name}, your current picture count is...
 				</div>
 				<div className='white f1'>
 					{user.entries}
@@ -17,7 +17,7 @@ const Rank = ({user, isSignedIn}) => {
 		return(
 			<div>
 					<div className='white f3'>
-						{'Sign in to get your rank!'}
+						{"Sign in to track the number of pictures you've tried!"}
 					</div>
 			</div>
 		);

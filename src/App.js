@@ -27,30 +27,31 @@ const particlesOptions = {
   }
 }
 
+const initialState = {
+   input: '',
+  imageURL: '',
+  box: [{
+    leftCol: '',
+    topRow: '',
+    rightCol: '',
+    bottomRow: '' 
+  }],
+  route:'home',
+  isSignedIn: false,
+  user: {
+    id: '',
+    name: '',
+    email: '',
+    entries: '0',
+    joined: ''
+  }
+}
+
 class App extends Component {
   constructor() {
     super();
-    this.state = {  
-      input: '',
-      imageURL: '',
-      box: [{
-        leftCol: '',
-        topRow: '',
-        rightCol: '',
-        bottomRow: '' 
-      }],
-      route:'home',
-      isSignedIn: false,
-      user: {
-        id: '',
-        name: '',
-        email: '',
-        entries: '0',
-        joined: ''
-      }
-
+    this.state = initialState;  
   }
-}
 
 loadUser = (data) =>{
   this.setState({user:{
@@ -61,11 +62,6 @@ loadUser = (data) =>{
     joined: data.joined
   }})
   console.log ("settung state to this data:", data);
-}
-componentDidMount() {
-  fetch('http://localhost:3001')
-  .then( response => response.json())
-  .then(console.log)
 }
 
 calculateFaceLocation = (data) => {
@@ -112,6 +108,7 @@ onButtonSubmit = () => {
             .then(count => {
               this.setState(Object.assign(this.state.user, {entries:count}))
               })
+            .catch(console.log)
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -125,7 +122,7 @@ onRouteChange = (route) => {
 changeSignIn = (isSignedIn) =>{
     if (isSignedIn) {
       console.log("I'm signed in and trying to sign out");
-      this.setState({ isSignedIn: false }, () => {console.log(this.state.route)});
+      this.setState(initialState);
   } else {
       this.setState({ isSignedIn: true }, () => {console.log(this.state.route)});
   }
