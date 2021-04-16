@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Navigation = ({changeSignIn, onRouteChange, isSignedIn, route}) => {
-	console.log(isSignedIn)
 	if (isSignedIn && route ==='home'){
 		return(
 			<nav style={{display: 'flex', justifyContent: 'flex-end'}}>

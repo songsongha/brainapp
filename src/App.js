@@ -56,7 +56,6 @@ loadUser = (data) =>{
     entries: data.entries,
     joined: data.joined
   }})
-  console.log ("settung state to this data:", data);
 }
 
 calculateFaceLocation = (data) => {
@@ -108,7 +107,7 @@ onButtonSubmit = () => {
             .then(count => {
               this.setState(Object.assign(this.state.user, {entries:count}))
               })
-            .catch(console.log)
+            .catch(console.log) //turn this into an error message return
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -120,8 +119,7 @@ onRouteChange = (route) => {
 }
 
 changeSignIn = (isSignedIn) =>{
-    if (isSignedIn) {
-      console.log("I'm signed in and trying to sign out");
+    if (isSignedIn) {   
       this.setState(initialState);
   } else {
       this.setState({ isSignedIn: true }, () => {console.log(this.state.route)});

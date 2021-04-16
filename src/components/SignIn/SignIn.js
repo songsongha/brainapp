@@ -26,12 +26,11 @@ class SignIn extends React.Component {
 		.then(response => response.json())
 		.then(user => {
 			if (user.id) {
-				console.log("signed in successfully",user)
 				this.props.onRouteChange('home'); 
 				this.props.changeSignIn(false);
 				this.props.loadUser(user);
 			} else {
-				alert('Incorrect username or password')
+				alert('Incorrect username or password');
 			}
 		})
 	}
