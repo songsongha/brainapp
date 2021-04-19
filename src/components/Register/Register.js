@@ -19,24 +19,34 @@ class Register extends React.Component {
 	onPasswordChange = (event) => {
 		this.setState({password: event.target.value});
 	}
-
+	emailIsValid = (email) => {
+		return /\S+@\S+\.\S+/.test(email);
+	}
 	onSubmitRegister = () => {
-		fetch('http://localhost:3001/register', {
-			method: 'post',
-			headers: { 'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				email: this.state.email,	
-				password: this.state.password,
-				name: this.state.name
+		const {email, password, name} = this.state;
+
+		if (this.emailIsValid(email)){
+			fetch('http://localhost:3001/register', {
+				method: 'post',
+				headers: { 'Content-Type': 'application/json'},
+				body: JSON.stringify({
+					email: email,	
+					password: password,
+					name: name
+				})
 			})
-		})
-		.then(response => response.json())
-		.then(user => {
-			if (user.id) {
-				this.props.loadUser(user);
-				this.props.onRouteChange('signin'); 
-			}
-		})
+			.then(response => response.json())
+			.then(user => {
+				if (user.id) {
+					this.props.loadUser(user);
+					this.props.onRouteChange('signin'); 
+				} else {
+					alert(user);
+				}
+			})
+		}else{
+			alert("valid email required");
+		}
 	}			
 	
 	render() {

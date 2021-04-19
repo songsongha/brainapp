@@ -30,7 +30,7 @@ class SignIn extends React.Component {
 				this.props.changeSignIn(false);
 				this.props.loadUser(user);
 			} else {
-				alert('Incorrect username or password');
+				alert(user);
 			}
 		})
 	}
