@@ -84,6 +84,11 @@ onInputChange = (event) => {
     this.setState({input: event.target.value}); //when the input changes update the state, make input = whatever is in the box
 }
 
+clearInput = (event) => {
+    document.getElementById('inputBox').value = '';//when the input changes update the state, make input = whatever is in the box
+    this.setState({imageURL: ''}); 
+}
+
 onButtonSubmit = () => {
     this.setState({imageURL: this.state.input}); // update the state, make imageURL = input
       fetch('http://localhost:3001/imageurl', {
@@ -137,7 +142,7 @@ changeSignIn = (isSignedIn) =>{
           ? <div>
               <Logo />
               <Rank user={user} isSignedIn={isSignedIn} />
-              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} />
+              <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} clearInput={this.clearInput} />
               <FaceRecognition boxArray={box} imageURL={imageURL} />
             </div>
           : (route === 'signin'
