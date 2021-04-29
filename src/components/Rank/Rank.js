@@ -2,7 +2,6 @@ import React from 'react';
 
 const Rank = ({user, isSignedIn}) => {
 	if (isSignedIn){
-		{console.log(user)};
 		return(
 			<div>
 				<div className='white f3'>

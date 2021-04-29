@@ -112,7 +112,7 @@ onButtonSubmit = () => {
             .then(count => {
               this.setState(Object.assign(this.state.user, {entries:count}))
               })
-            .catch(console.log) //turn this into an error message return
+            .catch(console.log) 
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
@@ -127,7 +127,7 @@ changeSignIn = (isSignedIn) =>{
     if (isSignedIn) {   
       this.setState(initialState);
   } else {
-      this.setState({ isSignedIn: true }, () => {console.log(this.state.route)});
+      this.setState({ isSignedIn: true });
   }
 }
 
