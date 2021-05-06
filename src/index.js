@@ -5,8 +5,16 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'tachyons';
 
+const Title = () => {
+	useEffect(() => {
+		document.title = "Brain App"
+	}, [])
+
+	return null
+};
 ReactDOM.render(
   <React.StrictMode>
+  	<Title />
     <App />
   </React.StrictMode>,
   document.getElementById('root')
